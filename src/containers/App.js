@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import styles from "./App.module.css";
 
-import Person from "./Person/Person";
-import Validation from "./Validation/Validation";
-import Char from "./Char/Char";
+import Person from "../components/Persons/Person/Person";
+import Validation from "../components/Validation/Validation";
+import Char from "../components/Char/Char";
 
 class App extends Component {
   state = {
@@ -105,7 +105,7 @@ class App extends Component {
         <p className={assignedClasses.join(" ")}>This is really working!</p>
         <button
           className={btnClass.join(" ")}
-          alt={this.state.showPersons}
+          // alt={this.state.showPersons}
           onClick={this.togglePersonsHandler}
         >
           Toggle Persons
