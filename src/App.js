@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import "./App.css";
+
+import styles from "./App.module.css";
+
 import Person from "./Person/Person";
 import Validation from "./Validation/Validation";
 import Char from "./Char/Char";
 
-export default class App extends Component {
+class App extends Component {
   state = {
     persons: [
       {
@@ -69,15 +71,9 @@ export default class App extends Component {
         />
       );
     });
-    const style = {
-      backGroundColor: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      marginLeft: "5px",
-      cursor: "pointer"
-    };
+
     let persons = null;
+    let btnClass = [styles.Button];
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -94,11 +90,24 @@ export default class App extends Component {
           })}
         </div>
       );
+      btnClass.push(styles.Red);
+    }
+    const assignedClasses = [];
+    if (this.state.persons.length <= 2) {
+      assignedClasses.push(styles.red);
+    }
+    if (this.state.persons.length <= 1) {
+      assignedClasses.push(styles.bold);
     }
     return (
       <div className="App">
         <h1>Hi, I'm a react app </h1>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <p className={assignedClasses.join(" ")}>This is really working!</p>
+        <button
+          className={btnClass.join(" ")}
+          alt={this.state.showPersons}
+          onClick={this.togglePersonsHandler}
+        >
           Toggle Persons
         </button>
         {persons}
@@ -115,3 +124,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

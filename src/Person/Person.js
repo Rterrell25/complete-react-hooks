@@ -1,9 +1,10 @@
 import React from "react";
-import "./Person.css";
+import classes from "./Person.module.css";
 
-export default function Person(props) {
+function Person(props) {
   return (
-    <div className="Person">
+    // <div className="Person" style={style}>
+    <div className={classes.Person}>
       <p onClick={props.click}>
         I'm {props.name} and I am {props.age}
       </p>
@@ -12,3 +13,4 @@ export default function Person(props) {
     </div>
   );
 }
+export default Person;
