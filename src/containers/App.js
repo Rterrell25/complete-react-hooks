@@ -6,6 +6,10 @@ import Char from "../components/Char/Char";
 import classes from "./App.module.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
   state = {
     persons: [
       {
@@ -25,9 +29,27 @@ class App extends Component {
       }
     ],
     showPersons: false,
+    showCockpit: true,
     userInput: ""
   };
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
+  // componentWillMount() {
+  //   console.log("[App.js] componentWillMount");
+  // }
+  componentDidMount() {
+    console.log("[App.js] componentDidMount");
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js shouldComponentUpdate");
+    return true;
+  }
 
+  componentDidUpdate() {
+    console.log("[App.js] componentDidUpdate");
+  }
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -61,6 +83,7 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
   render() {
+    console.log("[App.js] render");
     const charList = this.state.userInput.split("").map((ch, index) => {
       return (
         <Char
@@ -85,11 +108,21 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonsHandler}
-        />
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonsHandler}
+          />
+        ) : null}
         {persons}
         <br />
         <input
