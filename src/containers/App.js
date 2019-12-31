@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import Cockpit from "../components/Cockpit/Cockpit";
 import Persons from "../components/Persons/Persons";
-import Validation from "../components/Validation/Validation";
-import Char from "../components/Char/Char";
+
 import classes from "./App.module.css";
 
 class App extends Component {
@@ -84,15 +83,6 @@ class App extends Component {
   };
   render() {
     console.log("[App.js] render");
-    const charList = this.state.userInput.split("").map((ch, index) => {
-      return (
-        <Char
-          character={ch}
-          key={index}
-          clicked={() => this.deleteCharHandler(index)}
-        />
-      );
-    });
 
     let persons = null;
 
@@ -119,20 +109,11 @@ class App extends Component {
           <Cockpit
             title={this.props.appTitle}
             showPersons={this.state.showPersons}
-            persons={this.state.persons}
+            personsLength={this.state.persons.length}
             clicked={this.togglePersonsHandler}
           />
         ) : null}
         {persons}
-        <br />
-        <input
-          type="text"
-          onChange={this.inputChangedHandler}
-          value={this.state.userInput}
-        />
-        <p>{this.state.userInput}</p>
-        <Validation inputLength={this.state.userInput.length} />
-        {charList}
       </div>
     );
   }
